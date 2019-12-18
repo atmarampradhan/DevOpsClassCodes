@@ -1,5 +1,9 @@
 pipeline {
   agent any
+    tools { 
+        maven 'myMaven' 
+        jdk 'myjava' 
+    }
   stages {
     stage('checkout scm') {
         steps {
@@ -23,6 +27,15 @@ pipeline {
             }
         }
     } 
+   stages {
+    stage('Build') {
+        steps {
+            script{
+                //git credentialsId: 'a618bfad7e2cae4c029afaaff506a8c32025c465', url: 'ssh://git@github.com:atmarampradhan/DevOpsClassCodes.git'
+                sh 'mvn clean install'
+            }
 
+        }
+    }
   }
 }
